@@ -55,6 +55,19 @@ const createBankUser = async()=>{
       console.error(err);
     }
   }
+
+  const [allCustomers, setAllCustomers] = useState<Array<{id: string; address: string; gender: string; contact: string; fullName: string; }>>([]);
+  const getAllCustomers = async()=>{
+    try{
+      setLoading(true);
+      const users = await backend.getCustomers();
+      console.log(users);
+      setAllCustomers(users);
+    }catch(err){
+      console.error(err);
+    }
+  }
+  
   //...Contact ................
   const [contact, setContact] = useState('');
   const [address, setAddress] = useState('');
@@ -198,7 +211,9 @@ const createBankUser = async()=>{
 
         </div>
 
+
         <form onSubmit={handleSubmit}>
+        <h2>Add Customer KYC</h2>
       <div>
         <label htmlFor="owner">Owner:</label>
         <input
@@ -232,6 +247,19 @@ const createBankUser = async()=>{
       </div>
       <button type="submit">Upload KYC</button>
     </form>
+
+
+    
+    <h3>Get All Customers</h3>
+
+<button onClick={getBankUsers} >Get Customers</button>
+<ul>
+  {allCustomers.map((user) => (
+    <li key={user.id}>
+      Full Name: {user.fullName}, Address: {user.address}, Contact: {user.contact}, Gender: {user.gender}
+    </li>
+  ))}
+</ul>
 
       
     </div>
