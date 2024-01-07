@@ -1,0 +1,26 @@
+service: () -> {
+    activateBankUser: (text) -> (text);
+    addBankUser: (record {password:text; role:text; fullName:text}) -> (record {id:text; active:bool; password:text; role:text; fullName:text});
+    addCustomer: (record {contact:text; fullName:text; address:text; gender:text}) -> (record {id:text; contact:text; fullName:text; address:text; gender:text});
+    addCustomerKYC: (record {owner:text; description:text; image:vec nat8}) -> (record {id:text; owner:text; description:text; approved:bool; image:vec nat8});
+    approveCustomerKYC: (text) -> (text);
+    deActivateBankUser: (text) -> (text);
+    deleteCustomer: (text) -> (text);
+    deleteCustomerKYC: (text) -> (text);
+    getAllKYC: () -> (vec record {id:text; owner:text; description:text; approved:bool; image:vec nat8}) query;
+    getBankUser: (text) -> (opt record {id:text; active:bool; password:text; role:text; fullName:text}) query;
+    getBankUsers: () -> (vec record {id:text; active:bool; password:text; role:text; fullName:text}) query;
+    getCustomer: (text) -> (opt record {id:text; contact:text; fullName:text; address:text; gender:text}) query;
+    getCustomerKYC: (text) -> (opt record {id:text; owner:text; description:text; approved:bool; image:vec nat8}) query;
+    getCustomers: () -> (vec record {id:text; contact:text; fullName:text; address:text; gender:text}) query;
+    getCustomersApprovedKYC: (text) -> (vec record {id:text; owner:text; description:text; approved:bool; image:vec nat8}) query;
+    getCustomersKYC: () -> (vec record {id:text; owner:text; description:text; approved:bool; image:vec nat8}) query;
+    getCustomersPendingKYC: (text) -> (vec record {id:text; owner:text; description:text; approved:bool; image:vec nat8}) query;
+    isAdmin: (text) -> (bool) query;
+    isAuditor: (text) -> (bool) query;
+    isClerk: (text) -> (bool) query;
+    loginBankUser: (record {password:text; fullName:text}) -> (opt record {id:text; active:bool; password:text; role:text; fullName:text}) query;
+    updateBankUser: (record {id:text; active:bool; password:text; role:text; fullName:text}) -> (record {id:text; active:bool; password:text; role:text; fullName:text});
+    updateCustomer: (record {id:text; contact:text; fullName:text; address:text; gender:text}) -> (record {id:text; contact:text; fullName:text; address:text; gender:text});
+    updateCustomerKYC: (record {id:text; owner:text; description:text; approved:bool; image:vec nat8}) -> (record {id:text; owner:text; description:text; approved:bool; image:vec nat8});
+}
